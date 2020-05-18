@@ -22,34 +22,6 @@ class NavButton @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         setUpAttributes(attrs)
     }
 
-    private fun setUpAttributes(attrs: AttributeSet?) {
-        val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.NavButton, 0, 0)
-
-        isActive = attributes.getBoolean(R.styleable.NavButton_isActive, true)
-        label = attributes.getString(R.styleable.NavButton_label)
-
-        attributes.recycle()
-    }
-
-    private fun changeActiveState(state: Boolean) {
-        icon?.visibility = if (state) View.VISIBLE else View.INVISIBLE
-        text?.setTextColor(
-            ResourcesCompat.getColor(
-                resources, if (state) R.color.colorNavActive else R.color.colorNavInActive, null
-            )
-        )
-    }
-
-    private fun setUpViews() {
-        icon = findViewById(R.id.navViewIcon)
-        text = findViewById(R.id.navViewTextView)
-    }
-
-    private fun setupValuesWithAttr() {
-        text?.text = label
-        changeActiveState(isActive)
-    }
-
     override fun onFinishInflate() {
         super.onFinishInflate()
 
@@ -63,6 +35,34 @@ class NavButton @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             listener?.onClick(it as NavButton)
             activateButtonAndDeactivateOthers(it as NavButton)
         }
+    }
+
+    private fun changeActiveState(state: Boolean) {
+        icon?.visibility = if (state) View.VISIBLE else View.INVISIBLE
+        text?.setTextColor(
+            ResourcesCompat.getColor(
+                resources, if (state) R.color.colorNavActive else R.color.colorNavInActive, null
+            )
+        )
+    }
+
+    private fun setUpAttributes(attrs: AttributeSet?) {
+        val attributes = context.theme.obtainStyledAttributes(attrs, R.styleable.NavButton, 0, 0)
+
+        isActive = attributes.getBoolean(R.styleable.NavButton_isActive, true)
+        label = attributes.getString(R.styleable.NavButton_label)
+
+        attributes.recycle()
+    }
+
+    private fun setUpViews() {
+        icon = findViewById(R.id.navViewIcon)
+        text = findViewById(R.id.navViewTextView)
+    }
+
+    private fun setupValuesWithAttr() {
+        text?.text = label
+        changeActiveState(isActive)
     }
 
     companion object {

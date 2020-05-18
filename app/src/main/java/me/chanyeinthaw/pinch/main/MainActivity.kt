@@ -35,26 +35,6 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener(::onNavigationDestinationChanged)
     }
 
-    private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        when(destination.id) {
-            R.id.settingsFragment -> binding.groupNav.visibility = View.GONE
-            R.id.coupleFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonCouple)
-            else -> binding.groupNav.visibility = View.VISIBLE
-        }
-    }
-
-    private fun onIconSettingsClick(v: View?) {
-        val destination : Int? = when(navController.currentDestination?.id) {
-            R.id.coupleFragment -> R.id.action_coupleFragment_to_settingsFragment
-            R.id.storyFragment -> R.id.action_storyFragment_to_settingsFragment
-            else -> null
-        }
-
-        destination?.let {
-            navController.navigate(destination)
-        }
-    }
-
     override fun onBackPressed() {
         when(navController.currentDestination?.id) {
             R.id.settingsFragment -> {
@@ -72,6 +52,26 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.action_storyFragment_to_coupleFragment)
             }
             else -> finish()
+        }
+    }
+
+    private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+        when(destination.id) {
+            R.id.settingsFragment -> binding.groupNav.visibility = View.GONE
+            R.id.coupleFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonCouple)
+            else -> binding.groupNav.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onIconSettingsClick(v: View?) {
+        val destination : Int? = when(navController.currentDestination?.id) {
+            R.id.coupleFragment -> R.id.action_coupleFragment_to_settingsFragment
+            R.id.storyFragment -> R.id.action_storyFragment_to_settingsFragment
+            else -> null
+        }
+
+        destination?.let {
+            navController.navigate(destination)
         }
     }
 
