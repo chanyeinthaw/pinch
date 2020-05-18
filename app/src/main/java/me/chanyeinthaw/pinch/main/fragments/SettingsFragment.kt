@@ -22,19 +22,16 @@ class SettingsFragment : Fragment() {
         mainActivity = activity as MainActivity
         navController = findNavController()
 
+        mainActivity.navControllerSettings = navController
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.settingsHomeFragment -> {
-                    mainActivity.navControllerSettings = navController
-                    mainActivity.settingFragmentCurrentDestination = HOME
+                    mainActivity.isSettingsAtSettingHome = true
                 }
             }
         }
 
         return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
-
-    companion object {
-        const val HOME = 0
     }
 }
