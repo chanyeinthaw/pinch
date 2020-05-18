@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navControllerHome: NavController
     private lateinit var binding: ActivityMainBinding
 
+    var navControllerSettings: NavController? = null
     var settingFragmentCurrentDestination = SettingsFragment.HOME
 
     override fun onCreate(savedInstanceState: Bundle?) {
