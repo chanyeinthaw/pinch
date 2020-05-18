@@ -9,12 +9,14 @@ import androidx.navigation.Navigation
 import me.chanyeinthaw.pinch.R
 import me.chanyeinthaw.pinch.main.views.NavButton
 import me.chanyeinthaw.pinch.databinding.ActivityMainBinding
+import me.chanyeinthaw.pinch.main.fragments.SettingsFragment
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navControllerHome: NavController
-    private lateinit var navControllerSettings: NavController
     private lateinit var binding: ActivityMainBinding
+
+    var settingFragmentCurrentDestination = SettingsFragment.HOME
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +33,8 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         when(navControllerHome.currentDestination?.id) {
             R.id.settingsFragment -> {
-                val destination : Pair<Int, NavButton>? = when(navControllerHome.previousBackStackEntry?.destination?.id) {
-                    R.id.coupleFragment -> Pair(R.id.action_settingsFragment_to_coupleFragment, binding.buttonCouple)
-                    R.id.storyFragment -> Pair(R.id.action_settingsFragment_to_storyFragment, binding.buttonStory)
-                    else -> null
-                }
-
-                destination?.let {
-                    navControllerHome.navigate(destination.first)
+                when(settingFragmentCurrentDestination) {
+                    SettingsFragment.HOME -> handleSettingsHomeOnBackPressed(navControllerHome.previousBackStackEntry?.destination?.id)
                 }
             }
             R.id.storyFragment -> {
@@ -48,15 +44,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleSettingsHomeOnBackPressed(destinationId: Int?) {
+        val destination : Pair<Int, NavButton>? = when(destinationId) {
+            R.id.coupleFragment -> Pair(R.id.action_settingsFragment_to_coupleFragment, binding.buttonCouple)
+            R.id.storyFragment -> Pair(R.id.action_settingsFragment_to_storyFragment, binding.buttonStory)
+            else -> null
+        }
+
+        destination?.let {
+            navControllerHome.navigate(destination.first)
+        }
+    }
+
     private fun setUpNavControllers() {
         navControllerHome = Navigation.findNavController(
             this@MainActivity,
             R.id.navHostFragment
-        )
-
-        navControllerSettings = Navigation.findNavController(
-            this@MainActivity,
-            R.id.navHostFragmentSettings
         )
     }
 
@@ -66,10 +69,12 @@ class MainActivity : AppCompatActivity() {
         binding.iconSettings.setOnClickListener(::onIconSettingsClick)
         binding.buttonCouple.setOnClickListener(::onButtonCoupleClick)
         binding.buttonStory.setOnClickListener(::onButtonStoryClick)
-        navControllerHome.addOnDestinationChangedListener(::onNavigationDestinationChanged)
+        navControllerHome.addOnDestinationChangedListener {
+            _, destination, _ -> onNavigationDestinationChanged(destination)
+        }
     }
 
-    private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+    private fun onNavigationDestinationChanged(destination: NavDestination) {
         when(destination.id) {
             R.id.settingsFragment -> binding.groupNav.visibility = View.GONE
             else -> {

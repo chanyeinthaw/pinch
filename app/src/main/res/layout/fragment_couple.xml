@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".couple.CoupleFragment">
+    tools:context=".main.fragments.CoupleFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTransparent"
@@ -177,7 +177,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewHoney" />
 
-    <me.chanyeinthaw.pinch.couple.views.CircularImageView
+    <me.chanyeinthaw.pinch.main.views.CircularImageView
         android:id="@+id/imageViewHoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardViewTransparent"
         app:layout_constraintEnd_toStartOf="@+id/imageView">
 
-    </me.chanyeinthaw.pinch.couple.views.CircularImageView>
+    </me.chanyeinthaw.pinch.main.views.CircularImageView>
 
     <TextView
         android:id="@+id/textViewHoney"
@@ -199,7 +199,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewHoney"
         tools:text="Chan" />
 
-    <me.chanyeinthaw.pinch.couple.views.CircularImageView
+    <me.chanyeinthaw.pinch.main.views.CircularImageView
         android:id="@+id/imageViewBabe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViewHoney"
         app:layout_constraintStart_toEndOf="@+id/imageView">
 
-    </me.chanyeinthaw.pinch.couple.views.CircularImageView>
+    </me.chanyeinthaw.pinch.main.views.CircularImageView>
 
     <TextView
         android:id="@+id/textViewBabe"

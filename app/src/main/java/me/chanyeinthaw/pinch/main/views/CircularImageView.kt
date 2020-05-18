@@ -1,4 +1,4 @@
-package me.chanyeinthaw.pinch.couple.views
+package me.chanyeinthaw.pinch.main.views
 
 import android.content.Context
 import android.util.AttributeSet

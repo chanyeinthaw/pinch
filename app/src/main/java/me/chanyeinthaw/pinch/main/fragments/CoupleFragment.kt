@@ -1,4 +1,4 @@
-package me.chanyeinthaw.pinch.couple
+package me.chanyeinthaw.pinch.main.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
