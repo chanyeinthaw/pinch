@@ -1,7 +1,6 @@
 package me.chanyeinthaw.pinch.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when(destination.id) {
             R.id.settingsFragment -> binding.groupNav.visibility = View.GONE
+            R.id.coupleFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonCouple)
             else -> binding.groupNav.visibility = View.VISIBLE
         }
     }
@@ -56,18 +56,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id == R.id.settingsFragment) {
-            val destination : Pair<Int, NavButton>? = when(navController.previousBackStackEntry?.destination?.id) {
-                R.id.coupleFragment -> Pair(R.id.action_settingsFragment_to_coupleFragment, binding.buttonCouple)
-                R.id.storyFragment -> Pair(R.id.action_settingsFragment_to_storyFragment, binding.buttonStory)
-                else -> null
-            }
+        when(navController.currentDestination?.id) {
+            R.id.settingsFragment -> {
+                val destination : Pair<Int, NavButton>? = when(navController.previousBackStackEntry?.destination?.id) {
+                    R.id.coupleFragment -> Pair(R.id.action_settingsFragment_to_coupleFragment, binding.buttonCouple)
+                    R.id.storyFragment -> Pair(R.id.action_settingsFragment_to_storyFragment, binding.buttonStory)
+                    else -> null
+                }
 
-            destination?.let {
-                navController.navigate(destination.first)
+                destination?.let {
+                    navController.navigate(destination.first)
+                }
             }
+            R.id.storyFragment -> {
+                navController.navigate(R.id.action_storyFragment_to_coupleFragment)
+            }
+            else -> finish()
         }
-        else finish()
     }
 
     private fun onButtonCoupleClick(v: View?) {
