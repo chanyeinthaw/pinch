@@ -58,8 +58,14 @@ class MainActivity : AppCompatActivity() {
     private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when(destination.id) {
             R.id.settingsFragment -> binding.groupNav.visibility = View.GONE
-            R.id.coupleFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonCouple)
-            else -> binding.groupNav.visibility = View.VISIBLE
+            else -> {
+                binding.groupNav.visibility = View.VISIBLE
+                when(destination.id) {
+                    R.id.coupleFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonCouple)
+                    R.id.storyFragment -> NavButton.activateButtonAndDeactivateOthers(binding.buttonStory)
+                }
+            }
+
         }
     }
 
