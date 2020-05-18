@@ -61,7 +61,7 @@ class NavButton @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         super.setOnClickListener {
             changeActiveState(true)
             listener?.onClick(it as NavButton)
-            deactivateOthersInGroup(it as NavButton)
+            activateButtonAndDeactivateOthers(it as NavButton)
         }
     }
 
@@ -74,7 +74,7 @@ class NavButton @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             }
         }
 
-        fun deactivateOthersInGroup(button: NavButton?) {
+        fun activateButtonAndDeactivateOthers(button: NavButton?) {
             buttons.forEach {
                 if (it != button) {
                     it.changeActiveState(false)
