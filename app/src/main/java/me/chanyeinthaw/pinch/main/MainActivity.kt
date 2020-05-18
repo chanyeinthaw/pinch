@@ -12,7 +12,8 @@ import me.chanyeinthaw.pinch.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navController: NavController
+    private lateinit var navControllerHome: NavController
+    private lateinit var navControllerSettings: NavController
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,37 +23,50 @@ class MainActivity : AppCompatActivity() {
 
         applyLayoutFullScreen()
 
-        navController = Navigation.findNavController(
-            this@MainActivity,
-            R.id.navHostFragment
-        )
+        setUpNavControllers()
 
-        NavButton.addToGroup(binding.buttonCouple, binding.buttonStory)
-
-        binding.iconSettings.setOnClickListener(::onIconSettingsClick)
-        binding.buttonCouple.setOnClickListener(::onButtonCoupleClick)
-        binding.buttonStory.setOnClickListener(::onButtonStoryClick)
-        navController.addOnDestinationChangedListener(::onNavigationDestinationChanged)
+        bindEventListeners()
     }
 
     override fun onBackPressed() {
-        when(navController.currentDestination?.id) {
+        when(navControllerHome.currentDestination?.id) {
             R.id.settingsFragment -> {
-                val destination : Pair<Int, NavButton>? = when(navController.previousBackStackEntry?.destination?.id) {
+                val destination : Pair<Int, NavButton>? = when(navControllerHome.previousBackStackEntry?.destination?.id) {
                     R.id.coupleFragment -> Pair(R.id.action_settingsFragment_to_coupleFragment, binding.buttonCouple)
                     R.id.storyFragment -> Pair(R.id.action_settingsFragment_to_storyFragment, binding.buttonStory)
                     else -> null
                 }
 
                 destination?.let {
-                    navController.navigate(destination.first)
+                    navControllerHome.navigate(destination.first)
                 }
             }
             R.id.storyFragment -> {
-                navController.navigate(R.id.action_storyFragment_to_coupleFragment)
+                navControllerHome.navigate(R.id.action_storyFragment_to_coupleFragment)
             }
             else -> finish()
         }
+    }
+
+    private fun setUpNavControllers() {
+        navControllerHome = Navigation.findNavController(
+            this@MainActivity,
+            R.id.navHostFragment
+        )
+
+        navControllerSettings = Navigation.findNavController(
+            this@MainActivity,
+            R.id.navHostFragmentSettings
+        )
+    }
+
+    private fun bindEventListeners() {
+        NavButton.addToGroup(binding.buttonCouple, binding.buttonStory)
+
+        binding.iconSettings.setOnClickListener(::onIconSettingsClick)
+        binding.buttonCouple.setOnClickListener(::onButtonCoupleClick)
+        binding.buttonStory.setOnClickListener(::onButtonStoryClick)
+        navControllerHome.addOnDestinationChangedListener(::onNavigationDestinationChanged)
     }
 
     private fun onNavigationDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
@@ -70,38 +84,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onIconSettingsClick(v: View?) {
-        val destination : Int? = when(navController.currentDestination?.id) {
+        val destination : Int? = when(navControllerHome.currentDestination?.id) {
             R.id.coupleFragment -> R.id.action_coupleFragment_to_settingsFragment
             R.id.storyFragment -> R.id.action_storyFragment_to_settingsFragment
             else -> null
         }
 
         destination?.let {
-            navController.navigate(destination)
+            navControllerHome.navigate(destination)
         }
     }
 
     private fun onButtonCoupleClick(v: View?) {
-        val destination : Int? = when(navController.currentDestination?.id) {
+        val destination : Int? = when(navControllerHome.currentDestination?.id) {
             R.id.storyFragment -> R.id.action_storyFragment_to_coupleFragment
             R.id.settingsFragment -> R.id.action_settingsFragment_to_coupleFragment
             else -> null
         }
 
         destination?.let {
-            navController.navigate(it)
+            navControllerHome.navigate(it)
         }
     }
 
     private fun onButtonStoryClick(v: View?) {
-        val destination : Int? = when(navController.currentDestination?.id) {
+        val destination : Int? = when(navControllerHome.currentDestination?.id) {
             R.id.coupleFragment -> R.id.action_coupleFragment_to_storyFragment
             R.id.settingsFragment -> R.id.action_settingsFragment_to_storyFragment
             else -> null
         }
 
         destination?.let {
-            navController.navigate(it)
+            navControllerHome.navigate(it)
         }
     }
 
