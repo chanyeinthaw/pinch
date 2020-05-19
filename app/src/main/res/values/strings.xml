@@ -8,4 +8,6 @@
     <string name="chat">Chat</string>
     <string name="settings">Settings</string>
     <string name="together_for">Together For</string>
+    <string name="couple_settings">Couple Settings</string>
+    <string name="change_starting_date">Change starting date</string>
 </resources>

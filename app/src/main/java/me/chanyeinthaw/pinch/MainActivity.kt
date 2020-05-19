@@ -1,20 +1,18 @@
 package me.chanyeinthaw.pinch
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import me.chanyeinthaw.pinch.customviews.NavButton
 import me.chanyeinthaw.pinch.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainRouter: MainNavigator
+    lateinit var navigator: MainNavigator
     private lateinit var binding: ActivityMainBinding
-
-    var navControllerSettings: NavController? = null
-    var isSettingsAtSettingHome : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         setUpNavControllers()
 
         bindEventListeners()
+
+        Preference.initialize(getPreferences(Context.MODE_PRIVATE))
+    }
+
+    override fun onBackPressed() {
+        navigator.handleBackFromHome(this) {
+            super.onBackPressed()
+        }
     }
 
     private fun setUpNavControllers() {
@@ -34,8 +40,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navHostFragment
         )
 
-        mainRouter = MainNavigator(navControllerHome)
-        mainRouter.applyOnDestinationChangeListener { visibility, buttonIndex ->
+        navigator = MainNavigator(navControllerHome)
+        navigator.applyOnDestinationChangeListener { visibility, buttonIndex ->
             binding.groupNav.visibility = visibility
             val button = when(buttonIndex) {
                 0 -> binding.buttonCouple
@@ -52,16 +58,12 @@ class MainActivity : AppCompatActivity() {
     private fun bindEventListeners() {
         NavButton.addToGroup(binding.buttonCouple, binding.buttonStory)
 
-        binding.iconSettings.setOnClickListener {
-            mainRouter.navigateToSettings()
-        }
-
         binding.buttonCouple.setOnClickListener {
-            mainRouter.navigateToCouple()
+            navigator.navigateToCouple()
         }
 
         binding.buttonStory.setOnClickListener {
-            mainRouter.navigateToStory()
+            navigator.navigateToStory()
         }
     }
 

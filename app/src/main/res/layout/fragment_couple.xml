@@ -220,4 +220,10 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewBabe"
         tools:text="Nyein" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textViewTotalDays,textViewHeader,textViewFooter" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

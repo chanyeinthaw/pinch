@@ -15,8 +15,8 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_coupleFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
+            android:id="@+id/action_coupleFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
             app:enterAnim="@anim/slide_in_up"
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
@@ -29,32 +29,17 @@
             android:id="@+id/action_storyFragment_to_coupleFragment"
             app:destination="@id/coupleFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/coupleFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_storyFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/slide_in_up"
             app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="me.chanyeinthaw.pinch.settings.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:id="@+id/editProfileFragment"
+        android:name="me.chanyeinthaw.pinch.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
         <action
-            android:id="@+id/action_settingsFragment_to_coupleFragment"
+            android:id="@+id/action_editProfileFragment_to_coupleFragment"
             app:destination="@id/coupleFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/slide_out_down"
-            app:popUpTo="@id/storyFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_settingsFragment_to_storyFragment"
-            app:destination="@id/storyFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/slide_out_down"
-            app:popUpTo="@id/storyFragment"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_down" />
     </fragment>
 </navigation>
