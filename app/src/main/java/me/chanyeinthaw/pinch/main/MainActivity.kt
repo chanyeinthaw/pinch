@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
         bindEventListeners()
     }
 
-    override fun onBackPressed() {
-        mainRouter.handleBackFromHome(this) {
-            super.onBackPressed()
-        }
-    }
-
     private fun setUpNavControllers() {
         val navControllerHome = Navigation.findNavController(
             this@MainActivity,
@@ -43,8 +37,17 @@ class MainActivity : AppCompatActivity() {
         )
 
         mainRouter = MainRouter(navControllerHome)
-        mainRouter.applyOnDestinationChangeListener {
-            binding.groupNav.visibility = it
+        mainRouter.applyOnDestinationChangeListener { visibility, buttonIndex ->
+            binding.groupNav.visibility = visibility
+            val button = when(buttonIndex) {
+                0 -> binding.buttonCouple
+                1 -> binding.buttonStory
+                else -> null
+            }
+
+            button?.let {
+                NavButton.activateButtonAndDeactivateOthers(button)
+            }
         }
     }
 

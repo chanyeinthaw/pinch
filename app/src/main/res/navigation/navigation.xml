@@ -29,7 +29,9 @@
             android:id="@+id/action_storyFragment_to_coupleFragment"
             app:destination="@id/coupleFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/coupleFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_storyFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
@@ -44,11 +46,15 @@
             android:id="@+id/action_settingsFragment_to_coupleFragment"
             app:destination="@id/coupleFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/slide_out_down" />
+            app:exitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/storyFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_settingsFragment_to_storyFragment"
             app:destination="@id/storyFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/slide_out_down" />
+            app:exitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/storyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
