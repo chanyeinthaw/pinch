@@ -19,4 +19,8 @@ class CircularImageView @JvmOverloads constructor(context: Context, attrs: Attri
 
         imageView = findViewById(R.id.imageViewCIV)
     }
+
+    fun setImageResource(resId: Int) {
+        imageView.setImageResource(resId)
+    }
 }

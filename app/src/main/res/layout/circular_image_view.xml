@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="profile"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/default_background" />
+                app:srcCompat="@drawable/default_profile" />
         </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

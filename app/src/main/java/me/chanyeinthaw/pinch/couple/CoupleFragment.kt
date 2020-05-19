@@ -1,24 +1,14 @@
 package me.chanyeinthaw.pinch.couple
 
 import android.annotation.SuppressLint
-import android.icu.text.DateIntervalInfo
-import android.icu.util.DateInterval
-import android.icu.util.TimeUnit
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
-import me.chanyeinthaw.pinch.MainActivity
-import me.chanyeinthaw.pinch.MainNavigator
-import me.chanyeinthaw.pinch.Preference
+import me.chanyeinthaw.pinch.*
 import me.chanyeinthaw.pinch.databinding.FragmentCoupleBinding
-import me.chanyeinthaw.pinch.toFormattedString
-import java.time.LocalDate
-import java.time.Period
-import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.math.ceil
 
@@ -36,7 +26,8 @@ class CoupleFragment : Fragment() {
         binding = FragmentCoupleBinding.inflate(inflater, container, false)
         navigator = (activity as MainActivity).navigator
 
-        initializeValues()
+        loadDaysDataFromPreferences()
+        loadImagesFromPreferences()
         initializeDatePicker()
         bindEventListeners()
 
@@ -61,7 +52,6 @@ class CoupleFragment : Fragment() {
         binding.textViewFooter.setOnClickListener(::showDatePicker)
         binding.textViewFooter.setOnClickListener(::showDatePicker)
 
-
         datePicker.addOnPositiveButtonClickListener(::onDateSelect)
     }
 
@@ -75,12 +65,11 @@ class CoupleFragment : Fragment() {
     private fun onDateSelect(date: Any) {
         Preference.startDate = date as Long
 
-        initializeValues()
+        loadDaysDataFromPreferences()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initializeValues() {
-
+    private fun loadDaysDataFromPreferences() {
         binding.textViewDate.text = data.upcomingTotalDaysDate.toFormattedString()
         binding.textViewDaysBeforeNumber.text = data.daysBeforeUpcomingTotalDays.toString()
         binding.textViewDaysNumber.text = data.upcomingTotalDays.toString()
@@ -89,6 +78,14 @@ class CoupleFragment : Fragment() {
 
         binding.textViewHoney.text = "Chan"
         binding.textViewBabe.text = "Nyein"
+    }
+
+    private fun loadImagesFromPreferences() {
+        val profileHoneyPath = Preference.profileHoneyPath
+        val profileBabePath = Preference.profileBabePath
+
+        if (profileHoneyPath?.isEmpty() == true) binding.imageViewHoney.setImageResource(R.drawable.profile_honey)
+        if (profileBabePath?.isEmpty() == true) binding.imageViewBabe.setImageResource(R.drawable.profile_babe)
     }
 
     class Data {
