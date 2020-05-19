@@ -1,4 +1,4 @@
-package me.chanyeinthaw.pinch.main.fragments
+package me.chanyeinthaw.pinch.settings
 
 import android.os.Bundle
 import android.util.Log

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/default_background"
     android:fitsSystemWindows="true"
-    tools:context=".main.MainActivity">
+    tools:context=".MainActivity">
 
     <View
         android:id="@+id/viewOverley"
@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <me.chanyeinthaw.pinch.main.views.NavButton
+    <me.chanyeinthaw.pinch.customviews.NavButton
         android:id="@+id/buttonStory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toEndOf="@+id/buttonCouple"
         app:layout_constraintTop_toTopOf="@+id/buttonCouple" />
 
-    <me.chanyeinthaw.pinch.main.views.NavButton
+    <me.chanyeinthaw.pinch.customviews.NavButton
         android:id="@+id/buttonCouple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

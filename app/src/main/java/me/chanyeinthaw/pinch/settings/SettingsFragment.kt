@@ -1,4 +1,4 @@
-package me.chanyeinthaw.pinch.main.fragments
+package me.chanyeinthaw.pinch.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import me.chanyeinthaw.pinch.R
-import me.chanyeinthaw.pinch.main.MainActivity
+import me.chanyeinthaw.pinch.MainActivity
 
 class SettingsFragment : Fragment() {
     private lateinit var mainActivity: MainActivity

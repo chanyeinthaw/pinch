@@ -1,18 +1,16 @@
-package me.chanyeinthaw.pinch.main
+package me.chanyeinthaw.pinch
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import me.chanyeinthaw.pinch.R
-import me.chanyeinthaw.pinch.main.views.NavButton
+import me.chanyeinthaw.pinch.customviews.NavButton
 import me.chanyeinthaw.pinch.databinding.ActivityMainBinding
-import me.chanyeinthaw.pinch.main.routers.MainRouter
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainRouter: MainRouter
+    private lateinit var mainRouter: MainNavigator
     private lateinit var binding: ActivityMainBinding
 
     var navControllerSettings: NavController? = null
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navHostFragment
         )
 
-        mainRouter = MainRouter(navControllerHome)
+        mainRouter = MainNavigator(navControllerHome)
         mainRouter.applyOnDestinationChangeListener { visibility, buttonIndex ->
             binding.groupNav.visibility = visibility
             val button = when(buttonIndex) {
@@ -55,15 +53,15 @@ class MainActivity : AppCompatActivity() {
         NavButton.addToGroup(binding.buttonCouple, binding.buttonStory)
 
         binding.iconSettings.setOnClickListener {
-            mainRouter.goToSettings()
+            mainRouter.navigateToSettings()
         }
 
         binding.buttonCouple.setOnClickListener {
-            mainRouter.goToCouple()
+            mainRouter.navigateToCouple()
         }
 
         binding.buttonStory.setOnClickListener {
-            mainRouter.goToStory()
+            mainRouter.navigateToStory()
         }
     }
 

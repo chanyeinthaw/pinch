@@ -1,11 +1,9 @@
-package me.chanyeinthaw.pinch.main.routers
+package me.chanyeinthaw.pinch
 
 import android.view.View
 import androidx.navigation.NavController
-import me.chanyeinthaw.pinch.R
-import me.chanyeinthaw.pinch.main.MainActivity
 
-class MainRouter(var controller: NavController) {
+class MainNavigator(var controller: NavController) {
     fun applyOnDestinationChangeListener(onDestinationChanged: (Int, Int?) -> Unit) {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
@@ -16,7 +14,7 @@ class MainRouter(var controller: NavController) {
         }
     }
 
-    fun goToStory() {
+    fun navigateToStory() {
         val destination : Int? = when(controller.currentDestination?.id) {
             R.id.coupleFragment -> R.id.action_coupleFragment_to_storyFragment
             R.id.settingsFragment -> R.id.action_settingsFragment_to_storyFragment
@@ -28,7 +26,7 @@ class MainRouter(var controller: NavController) {
         }
     }
 
-    fun goToCouple() {
+    fun navigateToCouple() {
         val destination : Int? = when(controller.currentDestination?.id) {
             R.id.storyFragment -> R.id.action_storyFragment_to_coupleFragment
             R.id.settingsFragment -> R.id.action_settingsFragment_to_coupleFragment
@@ -40,7 +38,7 @@ class MainRouter(var controller: NavController) {
         }
     }
 
-    fun goToSettings() {
+    fun navigateToSettings() {
         val destination : Int? = when(controller.currentDestination?.id) {
             R.id.coupleFragment -> R.id.action_coupleFragment_to_settingsFragment
             R.id.storyFragment -> R.id.action_storyFragment_to_settingsFragment

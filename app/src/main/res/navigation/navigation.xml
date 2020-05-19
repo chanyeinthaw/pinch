@@ -6,7 +6,7 @@
     app:startDestination="@id/coupleFragment">
     <fragment
         android:id="@+id/coupleFragment"
-        android:name="me.chanyeinthaw.pinch.main.fragments.CoupleFragment"
+        android:name="me.chanyeinthaw.pinch.couple.CoupleFragment"
         android:label="fragment_couple"
         tools:layout="@layout/fragment_couple" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/storyFragment"
-        android:name="me.chanyeinthaw.pinch.main.fragments.StoryFragment"
+        android:name="me.chanyeinthaw.pinch.story.StoryFragment"
         android:label="fragment_story"
         tools:layout="@layout/fragment_story" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="me.chanyeinthaw.pinch.main.fragments.SettingsFragment"
+        android:name="me.chanyeinthaw.pinch.settings.SettingsFragment"
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_coupleFragment"
